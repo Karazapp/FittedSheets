@@ -238,6 +238,8 @@ public class SheetViewController: UIViewController {
     
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        // Add a guard statement to prevent unexpected dismiss
+        guard presentedViewController == nil else { return }
         if let presenter = self.transition.presenter, self.options.shrinkPresentingViewController {
             self.transition.restorePresentor(presenter, completion: { _ in
                 self.didDismiss?(self)
